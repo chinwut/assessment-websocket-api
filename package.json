@@ -1,0 +1,36 @@
+{
+  "name": "nassessment-websocket-api",
+  "version": "1.0.0",
+  "description": "websocket and nodejs api",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"nodemon ./api/server.js\" \"nodemon ./websocket/server.js\"",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chinwut/nassessment-websocket-api.git"
+  },
+  "author": "Chinnawut",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chinwut/nassessment-websocket-api/issues"
+  },
+  "homepage": "https://github.com/chinwut/nassessment-websocket-api#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.2",
+    "express": "^4.18.2",
+    "firebase": "^10.7.2",
+    "firebase-admin": "^12.0.0",
+    "mongoose": "^8.1.0",
+    "morgan": "^1.10.0",
+    "winston": "^3.11.0",
+    "ws": "^8.16.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.0.3"
+  }
+}
