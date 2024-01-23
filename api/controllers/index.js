@@ -1,4 +1,4 @@
-const { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } = require('firebase/firestore');
+const { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc } = require('firebase/firestore');
 const firebaseApp = require('../middleware/firebaseConfig');
 const db = getFirestore(firebaseApp);
 
@@ -16,6 +16,24 @@ exports.create = async (req, res, next) => {
         const result = await addDoc(collection(db, firebaseCollection), firestoreData);
         logger.info(`Todo item created with ID: ${result.id}`);
         res.status(201).send(`Todo item created with ID: ${result.id}`);
+    } catch (error) {
+        logger.error(error.message);
+        next(error);
+    }
+};
+
+exports.update = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const updatedData = new TodoItem(req.body);
+        updatedData.validate();
+        const firestoreData = updatedData.toFirestore();
+
+        const docRef = doc(db, firebaseCollection, id);
+        await updateDoc(docRef, firestoreData);
+
+        logger.info(`Todo item with ID ${id} updated`);
+        res.status(200).send(`Todo item with ID ${id} updated`);
     } catch (error) {
         logger.error(error.message);
         next(error);

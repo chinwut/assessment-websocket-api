@@ -1,11 +1,14 @@
-module.exports = function connectionHandler(ws) {
-  console.log("connected");
-  
-  ws.on("message", (message) => {
-    console.log("Received message:", message);
-  });
 
-  ws.on("close", () => {
-    console.log("Client disconnected");
-  });
-};
+const { addClient, removeClient } = require('../functions/clientsManager');
+const { broadcastUserStatus } = require('../functions/broadcaster');
+
+function connectionHandler(ws) {
+    addClient(ws, { userName: null, isAdmin: false });
+
+    ws.on('close', () => {
+        removeClient(ws);
+        broadcastUserStatus();
+    });
+}
+
+module.exports = { connectionHandler };

@@ -6,6 +6,7 @@ const errorHandler = require('./middleware/errorHandler');
 const app = express();
 app.use(express.json());
 app.post('/api/create', controller.create);
+app.put('/api/update', controller.update);
 app.get('/api/getAll', controller.getAll);
 app.delete('/api/delete/:id', controller.delete);
 

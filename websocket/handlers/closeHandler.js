@@ -1,3 +1,5 @@
-module.exports = function closeHandler(ws, code, reason) {
-  console.log(`Connection closed. Code: ${code}, Reason: ${reason}`);
-};
+function closeHandler(ws, reason) {
+  console.log(`Connection closed. Reason: ${reason}`);
+}
+
+module.exports = closeHandler;
