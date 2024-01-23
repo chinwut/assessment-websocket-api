@@ -1,12 +1,16 @@
 const express = require('express');
+const cors = require('cors');
 require('dotenv').config();
 const controller = require('./controllers/');
 const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
+app.use(cors({
+    origin: 'http://localhost:5173' 
+  }));
 app.use(express.json());
 app.post('/api/create', controller.create);
-app.put('/api/update', controller.update);
+app.put('/api/update/:id', controller.update);
 app.get('/api/getAll', controller.getAll);
 app.delete('/api/delete/:id', controller.delete);
 

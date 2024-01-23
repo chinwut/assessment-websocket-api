@@ -17,6 +17,35 @@ body {
   width: 620px;
   height: 450px;
 }
+.user-name-entry {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.user-name-input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #79C7C5;
+  margin-right: 10px;
+  font-size: 1em;
+}
+
+.enter-chat-button {
+  padding: 10px 15px;
+  background-color: #79C7C5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.enter-chat-button:hover {
+  background-color: #A1E2D9;
+}
 
 .messages {
   position: absolute;
@@ -240,13 +269,64 @@ body {
 }
 .todolist-topic {
   position: absolute;
-  top: 22px;
+  top: 60px;
   text-transform: uppercase;
   color: #777777;
   font-size: .8em;
   letter-spacing: 2px;
   font-weight: 500;
   left: 20px;
+}
+
+.todolist input[type="text"] {
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #79C7C5;
+  border-radius: 5px;
+  margin: 11px 0 10px 10px;
+}
+
+.todolist button {
+  padding: 10px 15px;
+  background-color: #79C7C5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.todolist button:hover {
+  background-color: #A1E2D9;
+}
+
+.todolist ul {
+  list-style: none;
+  margin-top: 30px;
+  padding-left: 0;
+}
+
+.todolist li {
+  background-color: white;
+  margin-bottom: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: .8em;
+  letter-spacing: 2px;
+  font-weight: 500;
+  left: 20px;
+}
+
+.todolist li.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.todolist li input[type="checkbox"] {
+  margin-right: 10px;
 }
 .bottom-bar {
   position: absolute;

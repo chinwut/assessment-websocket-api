@@ -1,16 +1,14 @@
 class TodoItem {
-    constructor({ title, description, dueDate, isCompleted = false }) {
+    constructor({ title, owner,  isCompleted = false }) {
         this.title = title;
-        this.description = description;
-        this.dueDate = dueDate;
+        this.owner = owner;
         this.isCompleted = isCompleted;
     }
 
     toFirestore() {
         return {
             title: this.title,
-            description: this.description,
-            dueDate: this.dueDate,
+            owner: this.owner,
             isCompleted: this.isCompleted
         };
     }

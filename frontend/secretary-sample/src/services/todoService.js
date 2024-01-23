@@ -13,7 +13,7 @@ export const fetchTodos = async () => {
 
 export const addTodo = async (title) => {
     try {
-        await axios.post(`${API_BASE_URL}/create`, { title });
+        await axios.post(`${API_BASE_URL}/create`, title );
     } catch (error) {
         console.error('Error adding todo:', error);
         throw error;

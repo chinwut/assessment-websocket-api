@@ -1,4 +1,4 @@
-const { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc } = require('firebase/firestore');
+const { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, getDoc } = require('firebase/firestore');
 const firebaseApp = require('../middleware/firebaseConfig');
 const db = getFirestore(firebaseApp);
 
@@ -8,6 +8,7 @@ const logger = require('../middleware/logger');
 const firebaseCollection = process.env.FIREBASE_COLLECTION || 'todolist';
 
 exports.create = async (req, res, next) => {
+    logger.info(`call create ${JSON.stringify(req.body)}`);
     try {
         const newTodo = new TodoItem(req.body);
         newTodo.validate();
@@ -23,14 +24,17 @@ exports.create = async (req, res, next) => {
 };
 
 exports.update = async (req, res, next) => {
+    logger.info(`call update ${JSON.stringify(req.body)}`);
     try {
         const { id } = req.params;
-        const updatedData = new TodoItem(req.body);
-        updatedData.validate();
-        const firestoreData = updatedData.toFirestore();
-
         const docRef = doc(db, firebaseCollection, id);
-        await updateDoc(docRef, firestoreData);
+        const docSnapshot = await getDoc(docRef);
+        if (!docSnapshot.exists()) {
+            throw new Error(`Todo item with ID ${id} not found`);
+        }
+
+        const updatedData = { ...docSnapshot.data(), ...req.body };
+        await updateDoc(docRef, updatedData);
 
         logger.info(`Todo item with ID ${id} updated`);
         res.status(200).send(`Todo item with ID ${id} updated`);
