@@ -51,7 +51,7 @@ git clone https://github.com/chinwut/nassessment-websocket-api.git
 
 cd nassessment-websocket-api
 
-  
+```
 
 ### Install dependencies for the server:
 
@@ -61,7 +61,7 @@ cd  server
 
 npm  install
 
-  
+```
 
 ### Install dependencies for the frontend:
 
