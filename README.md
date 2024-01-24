@@ -149,7 +149,7 @@ docker-compose  up  --build
 
 ```
 
-Tests
+### Tests
 
 Run backend tests:
 
