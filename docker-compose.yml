@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  app:
+    build: 
+      context: ./server
+    ports:
+      - "3000:3000" 
+      - "8080:8080" 
+    environment:
+      PORT: 3000
+    volumes:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules
+
+  frontend:
+    build:
+      context: ./frontend/secretary-sample
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
