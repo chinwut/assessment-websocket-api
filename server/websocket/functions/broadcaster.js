@@ -3,14 +3,16 @@ const logger = require('../../logger');
 
 function broadcastMessage(message, senderWs) {
     const clients = getClients();
-
     logger.info(`Broadcasting message: ${message}`);
     clients.forEach((data, clientWs) => {
-        if (clientWs !== senderWs && clientWs.readyState === clientWs.OPEN) {
-            clientWs.send(JSON.stringify({ type: 'broadcast', message }));
+        if (clientWs.readyState === clientWs.OPEN) {
+            if (clientWs !== senderWs) {
+                clientWs.send(JSON.stringify({ type: 'broadcast', message }));
+            }
         }
     });
 }
+
 
 function sendDirectMessage(targetUserName, message, fromUserName) {
     const clients = getClients();

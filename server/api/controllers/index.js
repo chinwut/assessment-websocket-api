@@ -7,6 +7,11 @@ const logger = require('../../logger');
 
 const firebaseCollection = process.env.FIREBASE_COLLECTION || 'todolist';
 
+function getDocumentRef(id) {
+    return doc(db, firebaseCollection, id);
+}
+
+
 exports.create = async (req, res, next) => {
     logger.info(`call create ${JSON.stringify(req.body)}`);
     try {
@@ -27,7 +32,7 @@ exports.update = async (req, res, next) => {
     logger.info(`call update ${JSON.stringify(req.body)}`);
     try {
         const { id } = req.params;
-        const docRef = doc(db, firebaseCollection, id);
+        const docRef = getDocumentRef(id);
         const docSnapshot = await getDoc(docRef);
         if (!docSnapshot.exists()) {
             throw new Error(`Todo item with ID ${id} not found`);
@@ -62,7 +67,7 @@ exports.getAll = async (req, res, next) => {
 exports.delete = async (req, res, next) => {
     try {
         const { id } = req.params;
-        await deleteDoc(doc(db, firebaseCollection, id));
+        await deleteDoc(getDocumentRef(id));
         logger.info(`Todo item with ID ${id} deleted`);
         res.status(200).send(`Todo item with ID ${id} deleted`);
     } catch (error) {

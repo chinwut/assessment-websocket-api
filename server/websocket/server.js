@@ -6,6 +6,10 @@ const closeHandler = require('./handlers/closeHandler');
 const wss = new WebSocket.Server({ port: 8080 });
 
 wss.on('connection', (ws) => {
+    ws.on('error', error => {
+        console.error('WebSocket error:', error);
+    });
+
     connectionHandler(ws);
 
     ws.on('message', (message) => {
