@@ -89,11 +89,11 @@ This project integrates a WebSocket server with a Node.js REST API. It allows re
 
   
 
-git  clone  https://github.com/chinwut/nassessment-websocket-api.git
+git  clone  https://github.com/chinwut/assessment-websocket-api.git
 
   
 
-cd  nassessment-websocket-api
+cd  assessment-websocket-api
 
   
 
