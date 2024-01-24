@@ -17,7 +17,7 @@ function sendDirectMessage(targetUserName, message, fromUserName) {
     logger.info(`Sending direct message to ${targetUserName}: ${message}`);
     for (let [ws, data] of clients) {
         if (data.userName === targetUserName && ws.readyState === ws.OPEN) {
-            console.log(`Direct message sent to ${targetUserName}`);
+            logger.info(`Direct message sent to ${targetUserName}`);
             ws.send(JSON.stringify({ type: 'direct', from: fromUserName, message }));
             break;
         }

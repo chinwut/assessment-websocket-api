@@ -11,7 +11,7 @@ app.use(cors({
 app.use(express.json());
 app.post('/api/create', controller.create);
 app.put('/api/update/:id', controller.update);
-app.get('/api/getAll', controller.getAll);
+app.get('/api/getall', controller.getAll);
 app.delete('/api/delete/:id', controller.delete);
 
 app.use(errorHandler);
