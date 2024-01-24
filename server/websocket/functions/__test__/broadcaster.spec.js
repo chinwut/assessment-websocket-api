@@ -18,19 +18,18 @@ describe('Broadcaster', () => {
     afterEach(() => {
         jest.clearAllMocks();
     });
-
     describe('broadcastMessage', () => {
-        it('should broadcast a message to all clients except sender', () => {
-            const senderWs = mockWs;
-            fakeClients.set(senderWs, { userName: 'sender' });
-            const receiverWs = { ...mockWs, send: jest.fn() };
-            fakeClients.set(receiverWs, { userName: 'receiver' });
+        it('should broadcast a message to all connected clients', () => {
+            const client1Ws = { ...mockWs, send: jest.fn() };
+            const client2Ws = { ...mockWs, send: jest.fn() };
+            fakeClients.set(client1Ws, { userName: 'client1' });
+            fakeClients.set(client2Ws, { userName: 'client2' });
 
-            broadcastMessage('test message', senderWs);
+            broadcastMessage('test message');
 
-            expect(receiverWs.send).toHaveBeenCalledTimes(1);
-            expect(receiverWs.send).toHaveBeenCalledWith(JSON.stringify({ type: 'broadcast', message: 'test message' }));
-            expect(senderWs.send).not.toHaveBeenCalled();
+            const expectedMessage = JSON.stringify({ type: 'broadcast', message: 'test message' });
+            expect(client1Ws.send).toHaveBeenCalledWith(expectedMessage);
+            expect(client2Ws.send).toHaveBeenCalledWith(expectedMessage);
         });
     });
 

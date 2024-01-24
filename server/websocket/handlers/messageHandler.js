@@ -7,6 +7,7 @@ function messageHandler(ws, message) {
         const clients = getClients();
         const clientData = clients.get(ws);
 
+        
         if (data.type === 'join') {
             clientData.userName = data.userName;
             clientData.isAdmin = data.userName.toLowerCase() === 'admin';
@@ -14,9 +15,11 @@ function messageHandler(ws, message) {
             broadcastUserStatus();
         } else if (clientData.isAdmin && data.type === 'broadcast') {
             broadcastMessage(data.message, ws);
+            logger.info(`Broadcasted message: ${data.message}`);
         } else if (data.type === 'direct') {
             sendDirectMessage(data.to, data.message, data.from);
         }
+    
     } catch (error) {
         logger.error('Error handling message:', error);
     }

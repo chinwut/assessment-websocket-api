@@ -17,6 +17,8 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [isNameEntered, setIsNameEntered] = useState(false);
   const [newTodoTitle, setNewTodoTitle] = useState("");
+  const [broadcastMessages, setBroadcastMessages] = useState([]);
+  const [broadcastInput, setBroadcastInput] = useState("");
 
   const ws = useRef(null);
 
@@ -33,7 +35,6 @@ function App() {
 
   const handleWebSocketMessage = (event) => {
     const receivedMessage = JSON.parse(event.data);
-
     if (receivedMessage.type === "direct") {
       const chatUser =
         receivedMessage.from === userName
@@ -47,6 +48,11 @@ function App() {
       setOnlineUsers(
         receivedMessage.onlineUsers.filter((user) => user !== userName)
       );
+    } else if (receivedMessage.type === "broadcast") {
+      setBroadcastMessages((prevMessages) => [
+        ...prevMessages,
+        receivedMessage,
+      ]);
     }
   };
 
@@ -75,7 +81,16 @@ function App() {
       setInputMessage("");
     }
   };
-
+  const sendBroadcastMessage = () => {
+    if (broadcastInput !== "") {
+      const message = {
+        message: broadcastInput,
+        type: "broadcast",
+      };
+      ws.current.send(JSON.stringify(message));
+      setBroadcastInput("");
+    }
+  };
   const selectUserToChat = (user) => {
     setCurrentChatUser(user);
   };
@@ -121,6 +136,15 @@ function App() {
         </div>
       ) : (
         <div>
+
+<div className="broadcast-label">Broadcast Messages</div>
+          <div className="broadcast-messages">
+            {broadcastMessages.map((msg, index) => (
+              <div key={index} className="broadcast-message">
+                <div className="message-content">{msg.message}</div>
+              </div>
+            ))}
+          </div>
           <div className="online-users-section">
             <div className="messages"></div>
             <div className="profile">
@@ -198,6 +222,17 @@ function App() {
               ))}
             </ul>
           </div>
+          {userName.toLowerCase() === "admin" && (
+        <div className="broadcast-input">
+          <input
+            type="text"
+            placeholder="Broadcast a message..."
+            value={broadcastInput}
+            onChange={(e) => setBroadcastInput(e.target.value)}
+          />
+          <button onClick={sendBroadcastMessage}>Broadcast</button>
+        </div>
+      )}
         </div>
       )}
     </div>

@@ -115,7 +115,7 @@ body {
 .profile .name2 {
   position: absolute;
   top: 50px;
-  left: 20px;
+  left: 7px;
   text-transform: uppercase;
   color: #79C7C5;
   font-size: .8em;
@@ -328,6 +328,74 @@ body {
 .todolist li input[type="checkbox"] {
   margin-right: 10px;
 }
+.broadcast-message {
+  position: absolute;
+  top: -20%;
+  left: 35%;
+  width: 60%;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-height: 100px;
+  overflow-y: auto;
+  z-index: 1;
+}
+
+.broadcast-messages {
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: #333;
+}
+
+.broadcast-label {
+  position: absolute;
+    top: -26%;
+    left: 35%;
+    color: #4a4a4a;
+    margin-bottom: 10px;
+}
+.broadcast-input {
+  position: absolute;
+  bottom: 5%;
+  left: 35%;
+  width: 60%;
+  background-color: #f8f8f8;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+
+.broadcast-input input {
+  flex-grow: 1;
+  margin-right: 10px;
+  padding: 8px;
+  border: 1px solid #79C7C5;
+  border-radius: 4px;
+}
+
+.broadcast-input button {
+  padding: 8px 15px;
+  background-color: #79C7C5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.broadcast-input button:hover {
+  background-color: #A1E2D9;
+}
+
+
+
+
+
+
 .bottom-bar {
   position: absolute;
   width: 100%;
