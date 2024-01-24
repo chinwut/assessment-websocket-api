@@ -4,8 +4,10 @@ const logConfiguration = {
     transports: [
         new winston.transports.Console({
             level: 'info',
+            filename: 'logs/server.log',
             format: winston.format.combine(
                 winston.format.colorize(),
+                winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
                 winston.format.simple()
             )
         }),
@@ -13,6 +15,7 @@ const logConfiguration = {
             level: 'error',
             filename: 'logs/server.log',
             format: winston.format.combine(
+                winston.format.colorize(),
                 winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
                 winston.format.json()
             )

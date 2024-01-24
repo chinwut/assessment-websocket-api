@@ -1,9 +1,10 @@
 const { getClients } = require('./clientsManager');
+const logger = require('../../logger');
 
 function broadcastMessage(message, senderWs) {
     const clients = getClients();
 
-    console.log(`Broadcasting message: ${message}`);
+    logger.info(`Broadcasting message: ${message}`);
     clients.forEach((data, clientWs) => {
         if (clientWs !== senderWs && clientWs.readyState === clientWs.OPEN) {
             clientWs.send(JSON.stringify({ type: 'broadcast', message }));
@@ -13,7 +14,7 @@ function broadcastMessage(message, senderWs) {
 
 function sendDirectMessage(targetUserName, message, fromUserName) {
     const clients = getClients();
-    console.log(`Sending direct message to ${targetUserName}: ${message}`);
+    logger.info(`Sending direct message to ${targetUserName}: ${message}`);
     for (let [ws, data] of clients) {
         if (data.userName === targetUserName && ws.readyState === ws.OPEN) {
             console.log(`Direct message sent to ${targetUserName}`);

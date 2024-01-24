@@ -3,7 +3,7 @@ const firebaseApp = require('../middleware/firebaseConfig');
 const db = getFirestore(firebaseApp);
 
 const { TodoItem } = require('../models');
-const logger = require('../middleware/logger');
+const logger = require('../../logger');
 
 const firebaseCollection = process.env.FIREBASE_COLLECTION || 'todolist';
 
